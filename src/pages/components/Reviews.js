@@ -14,13 +14,18 @@ const Reviews = ({ productId }) => {
       );
       const data = await response.json();
       console.log(data);
-      setReviews(data.productReviews);
+      // if the review was removed keep it removed
+      const filteredReviews = data.productReviews.filter(
+        (review) => !localStorage.getItem(review.createdAt)
+      );
+      setReviews(filteredReviews);
     };
     fetchReviews();
   }, [productId]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
+
     // Fetch reviews for the new page from TrustPilot API
     // Note: This is a simplified example and does not include error handling or loading indicators
     fetch(
@@ -29,13 +34,18 @@ const Reviews = ({ productId }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        setReviews(data.productReviews);
+        const filteredReviews = data.productReviews.filter(
+          (review) => !localStorage.getItem(review.createdAt)
+        );
+        setReviews(filteredReviews);
       });
   };
 
   const handleRemove = (reviewId) => {
-    // Remove the review from the list (note: this does not remove the review from TrustPilot)
+    // Remove the review from the list (note: this does not remove the review from TrustPilot) if removed keep it removed
     setReviews(reviews.filter((review) => review.createdAt !== reviewId));
+    // Store the removed review in local storage
+    localStorage.setItem(reviewId, true);
   };
 
   return (

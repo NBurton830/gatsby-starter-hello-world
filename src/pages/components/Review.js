@@ -19,7 +19,7 @@ const Review = ({ review, onRemove }) => {
       </div>
       <div className="review-remove">
         {/* Display remove icon that calls onRemove when clicked */}
-        <Icon onClick={() => onRemove(review.createdAt)}>close</Icon>
+        <Icon onClick={() => onRemove(review.createdAt)}>X</Icon>
         
       </div>
     </div>
