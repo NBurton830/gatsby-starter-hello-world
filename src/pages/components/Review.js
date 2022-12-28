@@ -30,7 +30,7 @@ const Review = ({ review, onRemove }) => {
               margin: '0px',
             }
           }>{review.content}</p>
-          <div className="review-remove" style={{ display: "inline-block" }}>
+          <div className="review-remove" style={{ display: "inline-block" }} onClick={() => onRemove(review.createdAt)} >
             {/* Display remove icon that calls onRemove when clicked */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
